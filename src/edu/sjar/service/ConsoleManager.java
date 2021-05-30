@@ -2,6 +2,9 @@ package edu.sjar.service;
 
 import edu.sjar.commands.*;
 
+import javax.management.MBeanServer;
+import javax.management.ObjectName;
+import java.lang.management.ManagementFactory;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -20,7 +23,7 @@ public class ConsoleManager {
         params = new String[0];
     }
 
-    public void start(){
+    public void start() throws Exception{
         exit = false;
         Shot shot = new Shot();
         Help help = new Help();
@@ -32,6 +35,11 @@ public class ConsoleManager {
         commands.put(exit1.toString(), exit1);
         help.execute(this);
         Scanner input = new Scanner(System.in);
+        MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
+        ObjectName first = new ObjectName("edu.sjar.service:type=ShotChecker");
+        ObjectName second = new ObjectName("edu.sjar.service:type=HistoryStorage");
+        mbs.registerMBean(checker, first);
+        mbs.registerMBean(history, second);
         while (!exit){
             params = new String[0];
             String line = input.nextLine();
