@@ -112,7 +112,7 @@ class B {
 
     public byte[] getValueFromCache(String s) {
         try {
-            URL url = new URL(s); //todo не нравится
+            URL url = new URL(s);
             if (!cache.containsKey(url)) {
                 cache.put(url, new byte[262144]);
             }
@@ -208,7 +208,6 @@ class B {
             init();
             int i = 0;
             while (true) {
-                //todo i++??
                 i++;
                 try {
                     synchronized (printStream) {
@@ -268,16 +267,6 @@ class B {
         r.z10();
     }
 
-
-    protected void closeStream(ObjectOutputStream stream) {
-        if (stream != null) {
-            try {
-                stream.close();
-            } catch (IOException ignored) {
-            }
-        }
-
-    }
 }
 
 class E extends B {
