@@ -1,7 +1,6 @@
 package edu.sjar.task4;
 
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
@@ -270,6 +269,7 @@ class B {
 }
 
 class E extends B {
+    private final int MAX_CAPACITY = 16384;
     private final String GOOGLE_LINK = "https://www.google.com";
 
     public E() {
@@ -387,9 +387,13 @@ class E extends B {
     }
 
     public void z21() {
+        if (this.z12.size() > MAX_CAPACITY) {
+            this.z12.clear();
+            System.gc();
+        }
         for (int i = 0; i < 7; i++) {
             this.z12.add(String.valueOf(System.nanoTime()));
-            // System.out.println(this.z12.size());
+//             System.out.println(new Date() + " - " + this.z12.size());
         }
     }
 
